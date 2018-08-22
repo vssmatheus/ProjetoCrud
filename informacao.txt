@@ -1,0 +1,21 @@
+1) Criar uma conta no Google 
+caso não tenha
+2) Acessar o firebase e criar 
+um novo aplicativo
+3)Criar uma pasta local com o nome de Porjeto Minhas Despesas
+Topicos SI
+4) Criar um arquivo com o nome 
+index.html e salvar na pasta do 
+projeto local
+5) Obter o código referente as 
+configurações do Firebase e copiar e colar no arquivo index.html
+6) Instalar o firebase (ambiente de hospedagem)
+ Instalar o firebase tools
+com o codigo npm install -g firebase-tools dentro da pasta do projeto
+
+7) Executar o firebase-init
+
+8)Se der erro de login então digitar firebase-login
+9) Após o login então copiar o arquivo da pasta do projeto chamado index.html e substituir pelo arquivo do mesmo nome na pasta public
+10) Executar o comando firebase-deploy
+

@@ -1,0 +1,150 @@
+<html lang="pt-Br">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+        <!--<link rel="stylesheet" href="fontawesome-free-5.1.0-web/css/v4-shims.min.css">-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        
+        
+        <!--BOOTSTRAP -->        
+        <script src="assets/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css"
+        type="text/css" />
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+        <script src="assets/js/config.js"></script>
+        <script src="assets/js/AppList.js"></script>
+        
+        
+
+        <title>Lista de despesas</title>
+    </head>
+    <body onload="RetornarDespesas()">
+        
+        <div class="content">
+          <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #f5f5f5; border-bottom: solid 1px #ccc; padding: 30px">
+          <a class="navbar-brand" href="#"><img src="imagens/marca_UEG_vertical_extenso_cromia.png" width="100px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--<button onclick="logout()" class="main-botao btn btn-lg"><img src="user.png" alt="user" width="22px" style="margin: 5px; position:right;">Sign out</button>-->
+              <div class="collapse navbar-collapse" id="navbarNav" style="font-size: 15pt">
+                <ul class="navbar-nav">
+                  <li class="nav-item active" style="margin-right: 25px">
+                    <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 25px">
+                    <a class="nav-link" href="add.html">Add</a>
+                  </li>
+                  <li class="nav-item" style="margin-right: 25px">
+                    <a class="nav-link" href="#">Lista</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                  </li>
+                </ul>
+              </div>
+          </nav>
+        </div>
+        <div class="container">
+          <br>
+          <!--modal Login-->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <form>
+                          <div class="form-group">
+                            <label for="email"><strong>Email</strong></label>
+                            <input type="email"
+                              class="form-control" id="email"
+                                placeholder="Seu nome de usuário">                      
+                          </div>
+                          <div class="form-group">
+                              <label for="password"><strong>Senha</strong></label>
+                              <input type="password"
+                                class="form-control" id="senha" 
+                                placeholder="*******">                      
+                          </div> 
+                          <br>
+                          <div class="">
+                              <a href="#" style="text-decoration: none" class="float-left">Esqueceu sua Senha?</a>
+                              <a href="#" style="text-decoration: none" class="float-right">Cadastre-se</a>
+                            </div>                               
+                        </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Entrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="contenedor-tabla col-xs-12 col-sm-12 col-md-12">
+              <button class="btn btn-success btn-lg" href=""> <a href="add.html" style="color: #fff ; text-decoration: none"><i class="fas fa-plus"></i>  Adicionar Despesas</a> </button>
+              <br><hr>
+              <table class="table table-sm table-bordered table-hover" id="tbResultado">
+                  <thead class="thead thead-dark">
+                    <tr>
+                      <!--<th scope="col">#</th>-->
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Valor</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Excluir</th>
+                    </tr>
+                  </thead>  
+                        
+                </table>
+                <!--Div centralizada Loading--> 
+                <div class="row">
+                    <div style="margin: 0 auto;">
+                        <div class="col-xs-12">
+                            <img src='imagens/loading.gif' id='loader'/>
+                        </div>
+                    </div>
+                </div>               
+                <script>setTimeout(function(){ loader.style.display='none'; },1500);</script>
+                <!--Div centralizada Loading-->                
+                
+                  <div class="shadow p-3 mb-5 bg-white rounded" id="somaTotal" style="font-size:20px">
+                    <strong style="color:rgb(13, 53, 26)">Valor total em despesas<br><hr>R$</strong></div>
+                  
+                <!--<p class="alert alert-primary" id="somaTotal">Total: R$</p>--> 
+                <br><hr><br><br>
+              <!--  <ul class="list-group" id="listaResultados">
+              </ul> -->
+            </div>
+          </div>
+        </div>
+        
+
+        <!-- FOOTER -->
+        <div style="padding-top: 60px; padding-top: 120px; padding-bottom: 30px; background-color: rgb(25, 18, 53)">
+          <footer class="container" style="color:#ffffff">
+              <p class="float-right"><a href="#" style="text-decoration:none; font-size: 25px; color:#f5f5f5">Topo <i class="fas fa-arrow-circle-up"></i></a></p>
+              <p class="float-block"><a href="http://www.ueg.br" style="color: #ccc; text-decoration: none">
+                Site |  <img src="imagens/marca_UEG_vertical_extenso_cromia_branco.png" width="80px"></a></p>
+              <p>&copy; CopyRight-2018 Matheus Vieira, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+          </footer>
+        </div>
+        
+        <script src="assets/js/login.js"></script>
+        
+          
+          </script>
+        
+    </body>
+</html>
